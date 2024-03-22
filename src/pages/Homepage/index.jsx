@@ -85,9 +85,9 @@ const index = () => {
               <Grid item xs={12} className="flex justify-center">
                 <TextField
                   style={{ width: "50%", marginBottom: "10px" }}
-                  helperText="Please enter your Number Phone"
+                  helperText="Please enter your Phone Number"
                   id="demo-helper-text-misaligned"
-                  label="Number Phone"
+                  label="Phone Number"
                 />
               </Grid>
               <Grid item xs={12} className="flex justify-center">
