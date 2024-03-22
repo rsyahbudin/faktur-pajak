@@ -16,6 +16,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const drawerWidth = 240;
 
@@ -42,18 +44,20 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar>
-        <img src="/assets/logo.png" alt="Logo" style={{ height: "40px" }} />
+        <img src={logo} alt="Logo" style={{ height: "20px" }} />
       </Toolbar>
       <Divider />
       <List>
         {["Buat Faktur Pajak", "Proses Faktur Pajak"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <DescriptionIcon /> : <ReceiptLongIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
+            <Link to={index % 2 === 0 ? "/" : "/proses-faktur-pajak"}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <DescriptionIcon /> : <ReceiptLongIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>

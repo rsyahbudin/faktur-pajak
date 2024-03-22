@@ -13,3 +13,8 @@ html {
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.form_group_recaptcha > div > div {
+ display: flex;
+ place-content: center;
+}
