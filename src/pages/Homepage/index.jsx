@@ -1,5 +1,4 @@
 import * as React from "react";
-import Sidebar from "../../components/Sidebar";
 import { TextField, Button, Container, Grid, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ReCAPTCHA from "react-google-recaptcha";
+import logo from "../../assets/logo.png";
 
 const index = () => {
   const [open, setOpen] = React.useState(false);
@@ -29,9 +29,21 @@ const index = () => {
         className="flex items-center justify-center h-full"
         style={{ minHeight: "100vh" }}
       >
-        <Sidebar />
         <div className="flex-grow">
           <Container>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={logo}
+                alt="Logo"
+                style={{ width: "200px", height: "auto", objectFit: "contain" }}
+              />
+            </div>
             <Typography
               variant="h3"
               align="center"
@@ -46,46 +58,47 @@ const index = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Grid item xs={12}>
+              <Grid item xs={12} className="flex justify-center">
                 <TextField
+                  style={{ width: "50%", marginBottom: "10px" }}
+                  helperText="Please enter your name"
+                  id="demo-helper-text-misaligned"
                   label="Name"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} className="flex justify-center">
                 <TextField
+                  style={{ width: "50%", marginBottom: "10px" }}
+                  helperText="Please enter your ID Transaction"
+                  id="demo-helper-text-misaligned"
                   label="ID Trx"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} className="flex justify-center">
                 <TextField
+                  style={{ width: "50%", marginBottom: "10px" }}
+                  helperText="Please enter your Email"
+                  id="demo-helper-text-misaligned"
                   label="Email"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} className="flex justify-center">
                 <TextField
-                  label="No Telpon"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
+                  style={{ width: "50%", marginBottom: "10px" }}
+                  helperText="Please enter your Number Phone"
+                  id="demo-helper-text-misaligned"
+                  label="Number Phone"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} className="flex justify-center">
                 <TextField
+                  style={{ width: "50%", marginBottom: "10px" }}
+                  helperText="Please enter your NPWP"
+                  id="demo-helper-text-misaligned"
                   label="NPWP"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <div className="form_group_recaptcha">
                   <ReCAPTCHA
@@ -99,11 +112,14 @@ const index = () => {
                   <Button
                     variant="contained"
                     onClick={handleClickOpen}
+                    color="error"
                     sx={{ marginRight: 3 }}
                   >
                     Request Faktur Pajak
                   </Button>
-                  <Button variant="contained">Cek Status Request</Button>
+                  <Button variant="contained" color="error">
+                    Cek Status Request
+                  </Button>
                   <Dialog
                     open={open}
                     onClose={handleClose}
