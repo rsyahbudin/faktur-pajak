@@ -34,12 +34,20 @@ const style = {
 
 const index = () => {
    const navigate = useNavigate();
-   const [open, setOpen] = React.useState(false);
-   const [modalOpen, setModalOpen] = React.useState(false);
+ const [open, setOpen] = React.useState(false);
+ const [modalOpen, setModalOpen] = React.useState(false);
+ const [name, setName] = React.useState("");
+ const [idTrx, setIdTrx] = React.useState("");
+ const [email, setEmail] = React.useState("");
+ const [phoneNumber, setPhoneNumber] = React.useState("");
+ const [npwp, setNpwp] = React.useState("");
 
-   const handleClickOpen = () => {
+ const handleClickOpen = () => {
+    if (name && idTrx && email && phoneNumber && npwp) {
       setOpen(true);
-   };
+    }
+ };
+   
 
    const handleModalOpen = () => {
       setModalOpen(true);
@@ -67,83 +75,98 @@ const index = () => {
    return (
       <>
          <div
-            className="flex items-center justify-center h-full"
-            style={{ minHeight: "100vh" }}
-         >
-            <div className="flex-grow">
-               <Container>
-                  <div
-                     style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                     }}
-                  >
-                     <img
-                        src={logo}
-                        alt="Logo"
-                        style={{
-                           width: "200px",
-                           height: "auto",
-                           objectFit: "contain",
-                        }}
-                        className="mt-4"
-                     />
-                  </div>
-                  <Typography
-                     variant="h3"
-                     align="center"
-                     gutterBottom
-                     style={{ marginTop: "20px" }}
-                  >
-                     Faktur Pajak Trans Retail Indonesia
-                  </Typography>
-                  <Grid
-                     container
-                     spacing={2}
-                     justifyContent="center"
-                     alignItems="center"
-                  >
-                     <Grid item xs={12} className="flex justify-center">
-                        <TextField
-                           style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your name"
-                           id="demo-helper-text-misaligned"
-                           label="Name"
-                        />
-                     </Grid>
-                     <Grid item xs={12} className="flex justify-center">
-                        <TextField
-                           style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your ID Transaction"
-                           id="demo-helper-text-misaligned"
-                           label="ID Trx"
-                        />
-                     </Grid>
-                     <Grid item xs={12} className="flex justify-center">
-                        <TextField
-                           style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your Email"
-                           id="demo-helper-text-misaligned"
-                           label="Email"
-                        />
-                     </Grid>
-                     <Grid item xs={12} className="flex justify-center">
-                        <TextField
-                           style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your Phone Number"
-                           id="demo-helper-text-misaligned"
-                           label="Phone Number"
-                        />
-                     </Grid>
-                     <Grid item xs={12} className="flex justify-center">
-                        <TextField
-                           style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your NPWP"
-                           id="demo-helper-text-misaligned"
-                           label="NPWP"
-                        />
-                     </Grid>
+        className="flex items-center justify-center h-full"
+        style={{ minHeight: "100vh" }}
+      >
+        <div className="flex-grow">
+          <Container>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={logo}
+                alt="Logo"
+                style={{
+                 width: "200px",
+                 height: "auto",
+                 objectFit: "contain",
+                }}
+                className="mt-4"
+              />
+            </div>
+            <Typography
+              variant="h3"
+              align="center"
+              gutterBottom
+              style={{ marginTop: "20px" }}
+            >
+              Faktur Pajak Trans Retail Indonesia
+            </Typography>
+            <Grid
+              container
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item xs={12} className="flex justify-center">
+                <TextField
+                 style={{ width: "50%", marginBottom: "10px" }}
+                 helperText="Please enter your name"
+                 id="demo-helper-text-misaligned"
+                 label="Name"
+                 value={name}
+                 onChange={(e) => setName(e.target.value)}
+                 required
+                />
+              </Grid>
+              <Grid item xs={12} className="flex justify-center">
+                <TextField
+                 style={{ width: "50%", marginBottom: "10px" }}
+                 helperText="Please enter your ID Transaction"
+                 id="demo-helper-text-misaligned"
+                 label="ID Trx"
+                 value={idTrx}
+                 onChange={(e) => setIdTrx(e.target.value)}
+                 required
+                />
+              </Grid>
+              <Grid item xs={12} className="flex justify-center">
+                <TextField
+                 style={{ width: "50%", marginBottom: "10px" }}
+                 helperText="Please enter your Email"
+                 id="demo-helper-text-misaligned"
+                 label="Email"
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
+                 required
+                />
+              </Grid>
+              <Grid item xs={12} className="flex justify-center">
+                <TextField
+                 style={{ width: "50%", marginBottom: "10px" }}
+                 helperText="Please enter your Phone Number"
+                 id="demo-helper-text-misaligned"
+                 label="Phone Number"
+                 value={phoneNumber}
+                 onChange={(e) => setPhoneNumber(e.target.value)}
+                 required
+                />
+              </Grid>
+              <Grid item xs={12} className="flex justify-center">
+                <TextField
+                 style={{ width: "50%", marginBottom: "10px" }}
+                 helperText="Please enter your NPWP"
+                 id="demo-helper-text-misaligned"
+                 label="NPWP"
+                 value={npwp}
+                 onChange={(e) => setNpwp(e.target.value)}
+                 required
+                />
+              </Grid>
 
                      <Grid item xs={12}>
                         <div className="form_group_recaptcha">
