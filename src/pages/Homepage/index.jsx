@@ -11,6 +11,8 @@ import {
    Box,
    Fade,
    Stack,
+   Paper,
+   InputAdornment,
 } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -19,6 +21,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from "../../assets/logo.png";
+import { AccountBox, Phone, Receipt, AccountCircle, Email } from "@mui/icons-material";
+
 
 const style = {
    position: "absolute",
@@ -34,20 +38,34 @@ const style = {
 
 const index = () => {
    const navigate = useNavigate();
- const [open, setOpen] = React.useState(false);
- const [modalOpen, setModalOpen] = React.useState(false);
- const [name, setName] = React.useState("");
- const [idTrx, setIdTrx] = React.useState("");
- const [email, setEmail] = React.useState("");
- const [phoneNumber, setPhoneNumber] = React.useState("");
- const [npwp, setNpwp] = React.useState("");
+   const [open, setOpen] = React.useState(false);
+   const [modalOpen, setModalOpen] = React.useState(false);
+   const [name, setName] = React.useState("");
+   const [idTrx, setIdTrx] = React.useState("");
+   const [email, setEmail] = React.useState("");
+   const [phoneNumber, setPhoneNumber] = React.useState("");
+   const [npwp, setNpwp] = React.useState("");
+   const [emailError, setEmailError] = React.useState(null);
 
- const handleClickOpen = () => {
-    if (name && idTrx && email && phoneNumber && npwp) {
-      setOpen(true);
-    }
- };
-   
+   const isValidEmail = (email) => {
+      return /\S+@\S+\.\S+/.test(email);
+   };
+
+   const handleEmailChange = (event) => {
+      const emailValue = event.target.value;
+      if (!isValidEmail(emailValue)) {
+         setEmailError("Email is invalid");
+      } else {
+         setEmailError(null);
+      }
+      setEmail(emailValue);
+   };
+
+   const handleClickOpen = () => {
+      if (name && idTrx && email && phoneNumber && npwp && !emailError) {
+         setOpen(true);
+      }
+   };
 
    const handleModalOpen = () => {
       setModalOpen(true);
@@ -75,98 +93,134 @@ const index = () => {
    return (
       <>
          <div
-        className="flex items-center justify-center h-full"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="flex-grow">
-          <Container>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <img
-                src={logo}
-                alt="Logo"
-                style={{
-                 width: "200px",
-                 height: "auto",
-                 objectFit: "contain",
-                }}
-                className="mt-4"
-              />
-            </div>
-            <Typography
-              variant="h3"
-              align="center"
-              gutterBottom
-              style={{ marginTop: "20px" }}
-            >
-              Faktur Pajak Trans Retail Indonesia
-            </Typography>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Grid item xs={12} className="flex justify-center">
-                <TextField
-                 style={{ width: "50%", marginBottom: "10px" }}
-                 helperText="Please enter your name"
-                 id="demo-helper-text-misaligned"
-                 label="Name"
-                 value={name}
-                 onChange={(e) => setName(e.target.value)}
-                 required
-                />
-              </Grid>
-              <Grid item xs={12} className="flex justify-center">
-                <TextField
-                 style={{ width: "50%", marginBottom: "10px" }}
-                 helperText="Please enter your ID Transaction"
-                 id="demo-helper-text-misaligned"
-                 label="ID Trx"
-                 value={idTrx}
-                 onChange={(e) => setIdTrx(e.target.value)}
-                 required
-                />
-              </Grid>
-              <Grid item xs={12} className="flex justify-center">
-                <TextField
-                 style={{ width: "50%", marginBottom: "10px" }}
-                 helperText="Please enter your Email"
-                 id="demo-helper-text-misaligned"
-                 label="Email"
-                 value={email}
-                 onChange={(e) => setEmail(e.target.value)}
-                 required
-                />
-              </Grid>
-              <Grid item xs={12} className="flex justify-center">
-                <TextField
-                 style={{ width: "50%", marginBottom: "10px" }}
-                 helperText="Please enter your Phone Number"
-                 id="demo-helper-text-misaligned"
-                 label="Phone Number"
-                 value={phoneNumber}
-                 onChange={(e) => setPhoneNumber(e.target.value)}
-                 required
-                />
-              </Grid>
-              <Grid item xs={12} className="flex justify-center">
-                <TextField
-                 style={{ width: "50%", marginBottom: "10px" }}
-                 helperText="Please enter your NPWP"
-                 id="demo-helper-text-misaligned"
-                 label="NPWP"
-                 value={npwp}
-                 onChange={(e) => setNpwp(e.target.value)}
-                 required
-                />
-              </Grid>
+            className="flex items-center justify-center h-full"
+            style={{ minHeight: "100vh" }}
+         >
+            <div className="flex-grow">
+               <Container>
+                  <div
+                     style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                     }}
+                  >
+                     <img
+                        src={logo}
+                        alt="Logo"
+                        style={{
+                           width: "200px",
+                           height: "auto",
+                           objectFit: "contain",
+                        }}
+                        className="mt-4"
+                     />
+                  </div>
+                  <Typography
+                     variant="h3"
+                     align="center"
+                     gutterBottom
+                     style={{ marginTop: "20px" }}
+                  >
+                     Faktur Pajak Trans Retail Indonesia
+                  </Typography>
+                  <Grid
+                     container
+                     spacing={2}
+                     justifyContent="center"
+                     alignItems="center"
+                  >
+                     <Grid item xs={12} className="flex justify-center">
+                        <TextField
+                           style={{ width: "50%", marginBottom: "10px" }}
+                           helperText="Please enter your name"
+                           id="demo-helper-text-misaligned"
+                           label="Name"
+                           value={name}
+                           onChange={(e) => setName(e.target.value)}
+                           required
+                           InputProps={{
+                              startAdornment: (
+                                 <InputAdornment position="start">
+                                    <AccountCircle />
+                                 </InputAdornment>
+                              ),
+                           }}
+                        />
+                     </Grid>
+                     <Grid item xs={12} className="flex justify-center">
+                        <TextField
+                           style={{ width: "50%", marginBottom: "10px" }}
+                           helperText="Please enter your ID Transaction"
+                           id="demo-helper-text-misaligned"
+                           label="ID Trx"
+                           value={idTrx}
+                           onChange={(e) => setIdTrx(e.target.value)}
+                           required
+                           InputProps={{
+                              startAdornment: (
+                                 <InputAdornment position="start">
+                                    <Receipt />
+                                 </InputAdornment>
+                              ),
+                           }}
+                        />
+                     </Grid>
+                     <Grid item xs={12} className="flex justify-center">
+                        <TextField
+                           style={{ width: "50%", marginBottom: "10px" }}
+                           helperText={emailError ? emailError : "Please enter your Email"}
+                           id="demo-helper-text-misaligned"
+                           label="Email"
+                           value={email}
+                           onChange={handleEmailChange}
+                           error={!!emailError}
+                           required
+                           InputProps={{
+                              startAdornment: (
+                                 <InputAdornment position="start">
+                                    <Email />
+                                 </InputAdornment>
+                              ),
+                           }}
+                        />
+                     </Grid>
+                     <Grid item xs={12} className="flex justify-center">
+                        <TextField
+                           style={{ width: "50%", marginBottom: "10px" }}
+                           helperText="Please enter your Phone Number"
+                           id="outlined-error-helper-text"
+                           label="Phone Number"
+                           value={phoneNumber}
+                           onChange={(e) => setPhoneNumber(e.target.value)}
+                           required
+                           InputProps={{
+                              startAdornment: (
+                                 <InputAdornment position="start">
+                                    <Phone />
+                                 </InputAdornment>
+                              ),
+                           }}
+                        />
+                     </Grid>
+                     <Grid item xs={12} className="flex justify-center">
+                        <TextField
+                           style={{ width: "50%", marginBottom: "10px" }}
+                           helperText="Please enter your NPWP"
+                           id="demo-helper-text-misaligned"
+                           label="NPWP"
+                           value={npwp}
+                           onChange={(e) => setNpwp(e.target.value)}
+                           required
+                           InputProps={{
+                              startAdornment: (
+                                 <InputAdornment position="start">
+                                    <AccountBox />
+                                 </InputAdornment>
+                              ),
+                           }}
+                        />
+                     </Grid>
 
                      <Grid item xs={12}>
                         <div className="form_group_recaptcha">

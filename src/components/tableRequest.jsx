@@ -1,14 +1,24 @@
-// src/DataGridComponent.js
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Grid } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
-import InfoIcon from "@mui/icons-material/Info";
+import DraftsIcon from "@mui/icons-material/Drafts";
 import ReportIcon from "@mui/icons-material/Report";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 
-const DataGridComponent = () => {
+
+const DataGridComponent = ({ searchTerm }) => {
+   const filterModel = {
+      items: [
+         {
+            columnField: "id", // Adjust this to match your column field name
+            operatorValue: "contains",
+            value: searchTerm,
+         },
+      ],
+   };
+
    const columns = [
       { field: "id", headerName: "ID Trx", width: 90 },
       { field: "name", headerName: "Name", width: 150 },
@@ -26,8 +36,9 @@ const DataGridComponent = () => {
                   color = "success";
                   icon = <DoneIcon />;
                   break;
-               case "Waiting":
+               case "Open":
                   color = "warning";
+                  icon = <DraftsIcon />;
                   break;
                case "Process":
                   color = "primary";
@@ -70,6 +81,13 @@ const DataGridComponent = () => {
          time: "2020-01-01",
       },
       {
+         id: 1123123121,
+         name: "John Doe",
+         email: "john@gmail.com",
+         status: "Open",
+         time: "2020-01-01",
+      },
+      {
          id: 112311,
          name: "John Doe",
          email: "john@gmail.com",
@@ -85,7 +103,12 @@ const DataGridComponent = () => {
          className="data-grid-container mx-auto flex justify-center"
       >
          <Grid item xs={9} lg={12} className="mx-auto">
-            <DataGrid rows={rows} columns={columns} pageSize={5} />
+            <DataGrid
+               rows={rows}
+               columns={columns}
+               filterModel={filterModel}
+               pageSize={5}
+            />
          </Grid>
       </Grid>
    );

@@ -28,13 +28,11 @@ const LoginCard = () => {
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-dark mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" />
         </div>
-        <div className="flex items-center justify-between">
-          <button className="bg-white hover:bg-gray-300 text-primary font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+        <div className="flex items-center justify-center">
+          <button className="bg-white hover:bg-gray-300 text-primary font-bold rounded-full py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Sign In
           </button>
-          <a className="inline-block align-baseline font-bold text-sm text-white hover:text-gray-200" href="#">
-            Forgot Password?
-          </a>
+          
         </div>
       </div>
     </div>

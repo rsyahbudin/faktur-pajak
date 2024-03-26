@@ -1,16 +1,25 @@
 // src/SearchComponent.js
 import React, { useState } from "react";
 import DataGridComponent from "./tableRequest";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { TextField, Button, Typography } from "@mui/material";
 
 const SearchComponent = () => {
    const [searchTerm, setSearchTerm] = useState("");
    const [showDataGrid, setShowDataGrid] = useState(false);
+   const navigate = useNavigate();
 
    const handleSearch = () => {
       setShowDataGrid(true);
    };
+
+   const handleStatusRequest = () => {
+      // Navigate to /status when the button is clicked
+      navigate("/");
+   };
+
+   
 
    return (
       <div className="flex flex-col items-center justify-center h-screen">
@@ -45,6 +54,9 @@ const SearchComponent = () => {
             />
             <Button variant="contained" color="error" onClick={handleSearch}>
                Track
+            </Button>
+            <Button variant="contained" color="error" onClick={handleStatusRequest}>
+               Request Faktur Pajak
             </Button>
          </div>
          {showDataGrid && (
