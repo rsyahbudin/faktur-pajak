@@ -21,8 +21,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from "../../assets/logo.png";
-import { AccountBox, Phone, Receipt, AccountCircle, Email } from "@mui/icons-material";
-
+import {
+   AccountBox,
+   Phone,
+   Receipt,
+   AccountCircle,
+   Email,
+} from "@mui/icons-material";
 
 const style = {
    position: "absolute",
@@ -40,12 +45,18 @@ const index = () => {
    const navigate = useNavigate();
    const [open, setOpen] = React.useState(false);
    const [modalOpen, setModalOpen] = React.useState(false);
+   const [emailError, setEmailError] = React.useState(null);
    const [name, setName] = React.useState("");
    const [idTrx, setIdTrx] = React.useState("");
    const [email, setEmail] = React.useState("");
    const [phoneNumber, setPhoneNumber] = React.useState("");
    const [npwp, setNpwp] = React.useState("");
-   const [emailError, setEmailError] = React.useState(null);
+
+   const [nameValid, setNameValid] = React.useState(true);
+   const [idTrxValid, setIdTrxValid] = React.useState(true);
+   const [phoneNumberValid, setPhoneNumberValid] = React.useState(true);
+   const [npwpValid, setNpwpValid] = React.useState(true);
+   const [emailValid, setEmailValid] = React.useState(true);
 
    const isValidEmail = (email) => {
       return /\S+@\S+\.\S+/.test(email);
@@ -62,8 +73,16 @@ const index = () => {
    };
 
    const handleClickOpen = () => {
-      if (name && idTrx && email && phoneNumber && npwp && !emailError) {
+      const allFieldsValid =
+         name && idTrx && email && phoneNumber && npwp && !emailError;
+      if (allFieldsValid) {
          setOpen(true);
+      } else {
+         setNameValid(name ? true : false);
+         setIdTrxValid(idTrx ? true : false);
+         setEmailValid(email ? true : false);
+         setPhoneNumberValid(phoneNumber ? true : false);
+         setNpwpValid(npwp ? true : false);
       }
    };
 
@@ -132,8 +151,11 @@ const index = () => {
                   >
                      <Grid item xs={12} className="flex justify-center">
                         <TextField
+                           error={!nameValid}
+                           helperText={
+                              !nameValid ? "Please enter your name" : ""
+                           }
                            style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your name"
                            id="demo-helper-text-misaligned"
                            label="Name"
                            value={name}
@@ -150,8 +172,14 @@ const index = () => {
                      </Grid>
                      <Grid item xs={12} className="flex justify-center">
                         <TextField
+                           error={!idTrxValid}
+                           helperText={
+                              !idTrxValid
+                                 ? "Please enter your ID Transaction"
+                                 : ""
+                           }
                            style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your ID Transaction"
+                           // helperText="Please enter your ID Transaction"
                            id="demo-helper-text-misaligned"
                            label="ID Trx"
                            value={idTrx}
@@ -168,13 +196,19 @@ const index = () => {
                      </Grid>
                      <Grid item xs={12} className="flex justify-center">
                         <TextField
+                           // error={!emailValid}
+                           // helperText={
+                           //    !emailValid ? "Please enter your Email" : ""
+                           // }
+                           // helperText={emailError ? emailError : "" && !emailValid ? "Please enter your Email" : "" }
+                           helperText={emailError ? emailError : (!emailValid ? "Please enter your Email" : "")}
+
                            style={{ width: "50%", marginBottom: "10px" }}
-                           helperText={emailError ? emailError : "Please enter your Email"}
                            id="demo-helper-text-misaligned"
                            label="Email"
                            value={email}
                            onChange={handleEmailChange}
-                           error={!!emailError}
+                           error={!!emailError || !emailValid}
                            required
                            InputProps={{
                               startAdornment: (
@@ -187,8 +221,13 @@ const index = () => {
                      </Grid>
                      <Grid item xs={12} className="flex justify-center">
                         <TextField
+                           error={!phoneNumberValid}
+                           helperText={
+                              !phoneNumberValid
+                                 ? "Please enter your Phone Number"
+                                 : ""
+                           }
                            style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your Phone Number"
                            id="outlined-error-helper-text"
                            label="Phone Number"
                            value={phoneNumber}
@@ -205,8 +244,11 @@ const index = () => {
                      </Grid>
                      <Grid item xs={12} className="flex justify-center">
                         <TextField
+                           error={!npwpValid}
+                           helperText={
+                              !npwpValid ? "Please enter your ID NPWP" : ""
+                           }
                            style={{ width: "50%", marginBottom: "10px" }}
-                           helperText="Please enter your NPWP"
                            id="demo-helper-text-misaligned"
                            label="NPWP"
                            value={npwp}
