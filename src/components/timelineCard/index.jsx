@@ -4,6 +4,19 @@ import { ArrowForwardIos, BorderColorOutlined } from "@mui/icons-material";
 import CustomModal from "../Modal"; // Import the CustomModal component
 
 function timelineCard({ transaction }) {
+    let statusColor;
+    switch (transaction.status) {
+       case 'Sudah Dibuat':
+         statusColor = 'text-green-600'; // Green for "Sudah Dibuat"
+         break;
+       case 'Belum Dibuka':
+         statusColor = 'text-orange-600'; // orange for "Belum Dibuka"
+         break;
+       default:
+         statusColor = 'text-red-600'; // Default color if status is not recognized
+    }
+   
+
    let buttonText;
    if (transaction.status === "Sudah Dibuat") {
       buttonText = "Close";
@@ -25,9 +38,9 @@ function timelineCard({ transaction }) {
          <div className="p-8">
             {/* Wrap the icon with a click handler */}
             <BorderColorOutlined fontSize="small" className="mr-2" />
-            <span className="text-sm text-gray-900">{transaction.status}</span>
+            <span className={`text-sm ${statusColor}`} >{transaction.status}</span>
             <div className="flex justify-between items-center mt-1">
-               <div className="uppercase tracking-wide text-md text-red-500 font-semibold mr-4">
+               <div className="uppercase tracking-wide text-md text-slate-500 font-semibold mr-4">
                   ID Transaksi: {transaction.id}
                </div>
                <ArrowForwardIos
