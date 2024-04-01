@@ -19,8 +19,6 @@ const SearchComponent = () => {
       navigate("/");
    };
 
-   
-
    return (
       <div className="flex flex-col items-center justify-center h-screen">
          {/* Title and Logo */}
@@ -47,6 +45,7 @@ const SearchComponent = () => {
          {/* Search Input and Button */}
          <div className="flex flex-col items-center justify-center space-y-4">
             <TextField
+               icon="Search"
                label="ID Trx"
                variant="outlined"
                value={searchTerm}
@@ -55,13 +54,17 @@ const SearchComponent = () => {
             <Button variant="contained" color="error" onClick={handleSearch}>
                Track
             </Button>
-            <Button variant="contained" color="error" onClick={handleStatusRequest}>
+            <Button
+               variant="contained"
+               color="error"
+               onClick={handleStatusRequest}
+            >
                Request Faktur Pajak
             </Button>
          </div>
          {showDataGrid && (
             <div className="mt-8">
-                 <DataGridComponent searchTerm={searchTerm} />
+               <DataGridComponent searchTerm={searchTerm} />
             </div>
          )}
       </div>

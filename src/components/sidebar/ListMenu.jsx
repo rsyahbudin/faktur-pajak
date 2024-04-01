@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 
-// import ICONS from "@/config/icons";
 import {
     HomeIcon,
     PowerIcon,
     DocumentTextIcon,
     UsersIcon,
-    DocumentArrowDownIcon
+    DocumentArrowDownIcon,
+    ClockIcon
  } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
+
 
 export default function ListMenu({ sidebar }) {
   const { pathname } = useLocation();
@@ -67,9 +68,9 @@ const list = [
     link: "/member",
   },
   {
-    title: "Transaction",
-    icon: "transaction",
-    link: "/transactions",
+    title: "Timeline",
+    icon: "timeline",
+    link: "/timeline",
   },
   {
     title: "Sign Out",
@@ -87,8 +88,8 @@ const iconList = (e) => {
       {e == "member" && (
         <UsersIcon className="h-6 w-6 text-white"/>
       )}
-      {e == "transaction" && (
-        <DocumentTextIcon className="h-6 w-6 text-white"/>
+      {e == "timeline" && (
+        <ClockIcon className="h-6 w-6 text-white"/>
       )}
       {e == "redeem" && (
         <DocumentArrowDownIcon className="h-6 w-6 text-white"/>

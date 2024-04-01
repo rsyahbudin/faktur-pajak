@@ -12,7 +12,7 @@ const DataGridComponent = ({ searchTerm }) => {
    const filterModel = {
       items: [
          {
-            columnField: "id", // Adjust this to match your column field name
+            columnField: "id" , // Adjust this to match your column field name
             operatorValue: "contains",
             value: searchTerm,
          },
@@ -67,28 +67,28 @@ const DataGridComponent = ({ searchTerm }) => {
 
    const rows = [
       {
-         id: 1123123,
+         id: "1123123" ,
          name: "John Doe",
          email: "john@gmail.com",
          status: "Done",
          time: "2020-01-01",
       },
       {
-         id: 11231231,
+         id: "098182" ,
          name: "John Doe",
          email: "john@gmail.com",
          status: "Error",
          time: "2020-01-01",
       },
       {
-         id: 1123123121,
+         id: "521031",
          name: "John Doe",
          email: "john@gmail.com",
          status: "Open",
          time: "2020-01-01",
       },
       {
-         id: 112311,
+         id: "702340",
          name: "John Doe",
          email: "john@gmail.com",
          status: "Process",
